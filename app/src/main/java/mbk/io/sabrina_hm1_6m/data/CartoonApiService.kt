@@ -8,7 +8,7 @@ import retrofit2.http.Path
 
 interface CartoonApiService {
     @GET("character")
-    fun getCharacters(): Call<BaseResponse<Character>>
+    fun getCharacters(): Call<BaseResponse>
 
     @GET("character/{id}")
     fun getCharacter(@Path("id") id: Int): Call<Character>

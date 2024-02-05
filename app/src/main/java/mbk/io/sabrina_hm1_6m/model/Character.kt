@@ -2,18 +2,19 @@ package mbk.io.sabrina_hm1_6m.model
 
 import java.io.Serializable
 
-data class BaseResponse<T>(
-    var results: List<T>
+data class BaseResponse(
+    var results: List<Character>
 ) : Serializable
 
 data class Character(
     var id: Int,
     var name: String,
     var status: String,
+    var gender: String,
     var image: String,
     var species: String,
     var origin: Origin,
-    var location: Location,
+    var location: Location
 ) : Serializable
 
 data class Origin(

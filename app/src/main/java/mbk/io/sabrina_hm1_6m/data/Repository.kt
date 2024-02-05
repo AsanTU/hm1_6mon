@@ -14,19 +14,19 @@ class Repository @Inject constructor(private val api: CartoonApiService) {
     fun getCharacters(): MutableLiveData<List<Character>> {
         val characters = MutableLiveData<List<Character>>()
 
-        api.getCharacters().enqueue(object : Callback<BaseResponse<Character>>{
+        api.getCharacters().enqueue(object : Callback<BaseResponse> {
             override fun onResponse(
-                call: Call<BaseResponse<Character>>,
-                response: Response<BaseResponse<Character>>
+                call: Call<BaseResponse>,
+                response: Response<BaseResponse>
             ) {
-                if (response.isSuccessful && response.body() != null) {
+                if (response.isSuccessful && response.body() != null && response.code() in 200..300) {
                     response.body()?.let {
                         characters.postValue(it.results)
                     }
                 }
             }
 
-            override fun onFailure(call: Call<BaseResponse<Character>>, t: Throwable) {
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
                 Log.e("ololo", t.message.toString())
             }
 
@@ -41,7 +41,7 @@ class Repository @Inject constructor(private val api: CartoonApiService) {
                 call: Call<Character>,
                 response: Response<Character>
             ) {
-                response.body().let {
+                response.body()?.let {
                     characterLv.postValue(it)
                 }
             }

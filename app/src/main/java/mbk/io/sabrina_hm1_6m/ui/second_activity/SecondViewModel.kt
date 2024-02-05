@@ -1,4 +1,4 @@
-package mbk.io.sabrina_hm1_6m.ui
+package mbk.io.sabrina_hm1_6m.ui.second_activity
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -8,8 +8,9 @@ import mbk.io.sabrina_hm1_6m.model.Character
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: Repository): ViewModel(){
-    fun getAllData(): LiveData<List<Character>> {
-        return repository.getCharacters()
+class SecondViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+
+    fun getData(id: Int): LiveData<Character> {
+        return repository.getCharacter(id)
     }
 }
