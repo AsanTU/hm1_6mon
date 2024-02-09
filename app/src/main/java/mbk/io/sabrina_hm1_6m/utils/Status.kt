@@ -1,6 +1,7 @@
-package mbk.io.sabrina_hm1_6m
+package mbk.io.sabrina_hm1_6m.utils
 
 import android.widget.ImageView
+import mbk.io.sabrina_hm1_6m.R
 
 class Status (private val imgCircleStatus: ImageView) {
 

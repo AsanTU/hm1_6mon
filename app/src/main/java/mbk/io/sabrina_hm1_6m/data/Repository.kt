@@ -5,15 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import mbk.io.sabrina_hm1_6m.model.BaseResponse
 import mbk.io.sabrina_hm1_6m.model.Character
+import mbk.io.sabrina_hm1_6m.utils.Resource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
 class Repository @Inject constructor(private val api: CartoonApiService) {
-    fun getCharacters(): MutableLiveData<List<Character>> {
-        val characters = MutableLiveData<List<Character>>()
-
+    fun getCharacters(): MutableLiveData<Resource<List<Character>>> {
+        val characters = MutableLiveData<Resource<List<Character>>>()
+        characters.postValue(Resource.Loading())
         api.getCharacters().enqueue(object : Callback<BaseResponse> {
             override fun onResponse(
                 call: Call<BaseResponse>,
@@ -21,13 +22,15 @@ class Repository @Inject constructor(private val api: CartoonApiService) {
             ) {
                 if (response.isSuccessful && response.body() != null && response.code() in 200..300) {
                     response.body()?.let {
-                        characters.postValue(it.results)
+                        characters.postValue(
+                            Resource.Success(it.results)
+                        )
                     }
                 }
             }
 
             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                Log.e("ololo", t.message.toString())
+                characters.postValue(Resource.Error(t.message ?: "Unknown error!"))
             }
 
         })

@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import mbk.io.sabrina_hm1_6m.R
-import mbk.io.sabrina_hm1_6m.Status
+import mbk.io.sabrina_hm1_6m.utils.Status
 import mbk.io.sabrina_hm1_6m.databinding.ItemCharacterBinding
 import mbk.io.sabrina_hm1_6m.model.Character
 

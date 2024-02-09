@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import mbk.io.sabrina_hm1_6m.R
-import mbk.io.sabrina_hm1_6m.Status
+import mbk.io.sabrina_hm1_6m.utils.Status
 import mbk.io.sabrina_hm1_6m.databinding.ActivitySecondBinding
 import mbk.io.sabrina_hm1_6m.model.Character
 
