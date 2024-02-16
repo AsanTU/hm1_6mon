@@ -13,17 +13,15 @@ import mbk.io.sabrina_hm1_6m.model.Character
 import mbk.io.sabrina_hm1_6m.ui.CharacterAdapter
 import mbk.io.sabrina_hm1_6m.ui.second_activity.SecondActivity
 import mbk.io.sabrina_hm1_6m.utils.Resource
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val viewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
-    }
+    private val viewModel by viewModel<MainViewModel>()
 
     private val characterAdapter by lazy {
         CharacterAdapter(this::onClick)

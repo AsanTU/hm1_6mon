@@ -9,9 +9,8 @@ import mbk.io.sabrina_hm1_6m.utils.Resource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import javax.inject.Inject
 
-class Repository @Inject constructor(private val api: CartoonApiService) {
+class Repository (private val api: CartoonApiService) {
     fun getCharacters(): MutableLiveData<Resource<List<Character>>> {
         val characters = MutableLiveData<Resource<List<Character>>>()
         characters.postValue(Resource.Loading())

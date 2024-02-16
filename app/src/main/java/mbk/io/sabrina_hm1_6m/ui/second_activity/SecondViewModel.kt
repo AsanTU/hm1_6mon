@@ -7,8 +7,7 @@ import mbk.io.sabrina_hm1_6m.data.Repository
 import mbk.io.sabrina_hm1_6m.model.Character
 import javax.inject.Inject
 
-@HiltViewModel
-class SecondViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class SecondViewModel(private val repository: Repository) : ViewModel() {
 
     fun getData(id: Int): LiveData<Character> {
         return repository.getCharacter(id)

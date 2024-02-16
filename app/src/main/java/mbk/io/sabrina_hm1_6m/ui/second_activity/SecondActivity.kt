@@ -5,23 +5,19 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import dagger.hilt.android.AndroidEntryPoint
 import mbk.io.sabrina_hm1_6m.R
 import mbk.io.sabrina_hm1_6m.utils.Status
 import mbk.io.sabrina_hm1_6m.databinding.ActivitySecondBinding
 import mbk.io.sabrina_hm1_6m.model.Character
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class SecondActivity : AppCompatActivity() {
 
     private val binding: ActivitySecondBinding by lazy {
         ActivitySecondBinding.inflate(layoutInflater)
     }
-    private val viewModel by lazy {
-        ViewModelProvider(this)[SecondViewModel::class.java]
-    }
+    private val viewModel :SecondViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

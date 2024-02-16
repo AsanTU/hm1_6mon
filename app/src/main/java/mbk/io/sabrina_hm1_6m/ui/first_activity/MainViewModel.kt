@@ -8,8 +8,7 @@ import mbk.io.sabrina_hm1_6m.model.Character
 import mbk.io.sabrina_hm1_6m.utils.Resource
 import javax.inject.Inject
 
-@HiltViewModel
-class MainViewModel @Inject constructor(
+class MainViewModel (
     private val repository: Repository
 ) : ViewModel() {
     fun getAllData(): LiveData<Resource<List<Character>>> {
