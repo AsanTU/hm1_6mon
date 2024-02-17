@@ -1,4 +1,4 @@
-package mbk.io.sabrina_hm1_6m.model
+package mbk.io.sabrina_hm1_6m.data.model
 
 import java.io.Serializable
 

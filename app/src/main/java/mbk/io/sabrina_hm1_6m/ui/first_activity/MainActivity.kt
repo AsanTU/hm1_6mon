@@ -8,15 +8,16 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import mbk.io.sabrina_hm1_6m.data.base.BaseActivity
 import mbk.io.sabrina_hm1_6m.databinding.ActivityMainBinding
-import mbk.io.sabrina_hm1_6m.model.Character
+import mbk.io.sabrina_hm1_6m.data.model.Character
 import mbk.io.sabrina_hm1_6m.ui.CharacterAdapter
 import mbk.io.sabrina_hm1_6m.ui.second_activity.SecondActivity
 import mbk.io.sabrina_hm1_6m.utils.Resource
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -31,8 +32,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupRecycler()
-        //viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        viewModel.getAllData().observe(this) { state ->
+
+
+        viewModel.getCharacters()
+        viewModel.charactersLv.stateObserver(
+            success = {
+                characterAdapter.submitList(it.results)
+            },
+            state = {
+                binding.progressIndicator.isVisible = it is Resource.Loading
+            }
+        )
+
+        /*//viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel.charactersLv.observe(this) { state ->
             //val adapter = CharacterAdapter(this::onClick, it)
             binding.progressIndicator.isVisible = state is Resource.Loading
             when (state) {
@@ -41,12 +54,13 @@ class MainActivity : AppCompatActivity() {
                 }
                 is Resource.Loading -> {}
                 is Resource.Success -> {
-                    if (state.data != null)
-                        characterAdapter.setCharacter(state.data)
+                    if (state.data != null) {
+                        characterAdapter.submitList(state.data.results)
+                    }
                 }
             }
         }
-        //binding.recyclerView.adapter = adapter
+        //binding.recyclerView.adapter = adapter*/
     }
 
     private fun setupRecycler() = with(binding.recyclerView) {

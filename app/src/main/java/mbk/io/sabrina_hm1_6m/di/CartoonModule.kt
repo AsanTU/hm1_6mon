@@ -2,8 +2,8 @@ package mbk.io.sabrina_hm1_6m.di
 
 
 import mbk.io.sabrina_hm1_6m.BuildConfig
-import mbk.io.sabrina_hm1_6m.data.CartoonApiService
-import mbk.io.sabrina_hm1_6m.data.Repository
+import mbk.io.sabrina_hm1_6m.data.api.CartoonApiService
+import mbk.io.sabrina_hm1_6m.data.repository.Repository
 import mbk.io.sabrina_hm1_6m.ui.first_activity.MainViewModel
 import mbk.io.sabrina_hm1_6m.ui.second_activity.SecondViewModel
 import okhttp3.OkHttpClient
@@ -14,40 +14,46 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-    val networkModule = module {
-        single {
-            provideRetrofit(get())
-        }
+/*val cartoonModule = module {
+    принимает в себе список из 3х модулей
+}*/
 
-        single {
-            provideOkHttpClient(get())
-        }
-
-        single {
-            provideInterceptor()
-        }
-
-        single {
-            provideCartoonApiService(get())
-        }
+val networkModule = module {
+    single {
+        provideRetrofit(get())
     }
 
-    val repositoryModule = module {
-        single {
-            Repository(get())
-        }
+    single {
+        provideOkHttpClient(get())
     }
 
-    val viewModelModule = module {
-
-        viewModel {
-            MainViewModel(get())
-        }
-
-        viewModel {
-            SecondViewModel(get())
-        }
+    single {
+        provideInterceptor()
     }
+
+    single {
+        provideCartoonApiService(get())
+    }
+}
+
+val repositoryModule = module {
+    single {
+        Repository(get())
+    }
+}
+
+val viewModelModule = module {
+
+    viewModel {
+        MainViewModel(get())
+    }
+
+    viewModel {
+        SecondViewModel(get())
+    }
+}
+
+val cartoonModule = listOf(networkModule, repositoryModule, viewModelModule)
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
     Retrofit.Builder()

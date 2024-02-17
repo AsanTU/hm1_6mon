@@ -3,18 +3,20 @@ package mbk.io.sabrina_hm1_6m.ui
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import mbk.io.sabrina_hm1_6m.utils.Status
 import mbk.io.sabrina_hm1_6m.databinding.ItemCharacterBinding
-import mbk.io.sabrina_hm1_6m.model.Character
+import mbk.io.sabrina_hm1_6m.data.model.Character
 
 class CharacterAdapter(
     private val onClick: (character: Character) -> Unit,
     //private var list: List<Character>
-) : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
-
-    private var list = listOf<Character>()
+) : ListAdapter<Character, CharacterAdapter.CharacterViewHolder>(
+    CharacterDiffCallback()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val binding =
@@ -30,15 +32,8 @@ class CharacterAdapter(
         )
     }
 
-    override fun getItemCount() = list.size
-
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        holder.bind(list[position])
-    }
-
-    fun setCharacter(list: List<Character>) {
-        this.list = list
-        notifyDataSetChanged()
+        holder.bind(getItem(position))
     }
 
     class CharacterViewHolder(
@@ -64,3 +59,13 @@ class CharacterAdapter(
         }
     }
 }
+
+class CharacterDiffCallback : DiffUtil.ItemCallback<Character>() {
+    override fun areItemsTheSame(oldItem: Character, newItem: Character) = oldItem.id == newItem.id
+
+    override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
+        return oldItem == newItem
+    }
+
+}
+

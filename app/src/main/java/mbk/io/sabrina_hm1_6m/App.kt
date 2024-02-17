@@ -1,9 +1,7 @@
 package mbk.io.sabrina_hm1_6m
 
 import android.app.Application
-import mbk.io.sabrina_hm1_6m.di.networkModule
-import mbk.io.sabrina_hm1_6m.di.repositoryModule
-import mbk.io.sabrina_hm1_6m.di.viewModelModule
+import mbk.io.sabrina_hm1_6m.di.cartoonModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -14,7 +12,7 @@ class App :Application(){
 
         startKoin{
             androidContext(this@App)
-            modules(viewModelModule, repositoryModule, networkModule)
+            modules(cartoonModule)
         }
     }
 }
