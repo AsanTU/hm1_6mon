@@ -38,21 +38,6 @@ class SecondActivity : BaseActivity() {
         )
 
         viewModel.getCharacter(id)
-
-        /*viewModel.getData(id).observe(this) { state ->
-            when (state) {
-                is Resource.Error -> {
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
-                }
-
-                is Resource.Loading -> {}
-                is Resource.Success -> {
-                    if (state.data != null) {
-                        setCharacterData(state.data)
-                    }
-                }
-            }
-        }*/
     }
 
     private fun setCharacterData(it: Character) = with(binding) {

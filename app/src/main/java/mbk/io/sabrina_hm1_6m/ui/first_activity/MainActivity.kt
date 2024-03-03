@@ -43,24 +43,6 @@ class MainActivity : BaseActivity() {
                 binding.progressIndicator.isVisible = it is Resource.Loading
             }
         )
-
-        /*//viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        viewModel.charactersLv.observe(this) { state ->
-            //val adapter = CharacterAdapter(this::onClick, it)
-            binding.progressIndicator.isVisible = state is Resource.Loading
-            when (state) {
-                is Resource.Error -> {
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
-                }
-                is Resource.Loading -> {}
-                is Resource.Success -> {
-                    if (state.data != null) {
-                        characterAdapter.submitList(state.data.results)
-                    }
-                }
-            }
-        }
-        //binding.recyclerView.adapter = adapter*/
     }
 
     private fun setupRecycler() = with(binding.recyclerView) {
@@ -73,10 +55,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun onClick(character: Character) {
-        /*val intent = Intent(this, SecondActivity::class.java)
-        intent.putExtra(CHARACTER_ID_ARG, character.id)
-        startActivity(intent)*/
-
         startActivity(
             Intent(
                 this, SecondActivity::class.java

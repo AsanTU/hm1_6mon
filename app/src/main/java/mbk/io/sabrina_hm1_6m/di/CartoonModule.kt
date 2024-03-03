@@ -14,10 +14,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-/*val cartoonModule = module {
-    принимает в себе список из 3х модулей
-}*/
-
 val networkModule = module {
     single {
         provideRetrofit(get())

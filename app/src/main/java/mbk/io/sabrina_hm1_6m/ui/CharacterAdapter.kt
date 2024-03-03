@@ -13,7 +13,6 @@ import mbk.io.sabrina_hm1_6m.data.model.Character
 
 class CharacterAdapter(
     private val onClick: (character: Character) -> Unit,
-    //private var list: List<Character>
 ) : ListAdapter<Character, CharacterAdapter.CharacterViewHolder>(
     CharacterDiffCallback()
 ) {

@@ -21,17 +21,3 @@ class Repository(private val api: CartoonApiService) : BaseRepository() {
     }
 
 }
-
-/*   fun getCharacter(id: Int): LiveData<Resource<Character>> {
-        return liveData(Dispatchers.IO) {
-            emit(Resource.Loading())
-            try {
-                val response = api.getCharacter(id)
-                if (response.isSuccessful && response.body() != null && response.code() in 200..300) {
-                    emit(Resource.Success(response.body()!!))
-                }
-            } catch (io: IOException) {
-                emit(Resource.Error(io.message ?: "Unknown Error!"))
-            }
-        }
-    }*/
